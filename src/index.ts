@@ -1,4 +1,5 @@
 export { fetchTranscript, formatTranscriptAsText, formatTranscriptWithTimestamps, extractVideoId } from './utils/youtube.js';
+export { isYtDlpAvailable, fetchTranscriptViaStt } from './utils/stt.js';
 export { createProvider } from './providers/index.js';
 export { getPrompt } from './prompts/templates.js';
 export type { AIProvider, ProviderType, ProviderOptions, ProviderResponse } from './providers/types.js';
