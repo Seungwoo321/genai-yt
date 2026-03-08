@@ -24,8 +24,18 @@
     "test": "vitest",
     "test:run": "vitest run",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "pnpm build",
+    "release": "release-it",
+    "release:beta": "release-it --preRelease=beta"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Seungwoo321/genai-yt.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Seungwoo321/genai-yt/issues"
+  },
+  "homepage": "https://github.com/Seungwoo321/genai-yt#readme",
   "engines": {
     "node": ">=18.0.0"
   },
@@ -49,7 +59,9 @@
     "youtube-transcript": "^1.2.1"
   },
   "devDependencies": {
+    "@release-it/conventional-changelog": "^10.0.4",
     "@types/node": "^20.11.0",
+    "release-it": "^19.2.3",
     "tsup": "^8.0.1",
     "tsx": "^4.7.0",
     "typescript": "^5.3.3",
