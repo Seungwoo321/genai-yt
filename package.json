@@ -1,6 +1,6 @@
 {
   "name": "genai-yt",
-  "version": "0.1.1-beta.1",
+  "version": "0.1.1",
   "description": "AI-powered YouTube transcript extractor and analyzer using Claude Code or Cursor CLI",
   "type": "module",
   "main": "./dist/index.js",

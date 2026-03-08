@@ -1,5 +1,7 @@
 # Changelog
 
+## [0.1.1](https://github.com/Seungwoo321/genai-yt/compare/v0.1.1-beta.1...v0.1.1) (2026-03-08)
+
 ## [0.1.1-beta.1](https://github.com/Seungwoo321/genai-yt/compare/v0.1.1-beta.0...v0.1.1-beta.1) (2026-03-08)
 
 ## 0.1.1-beta.0 (2026-03-08)
