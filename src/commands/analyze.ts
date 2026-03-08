@@ -1,6 +1,7 @@
 import ora from 'ora';
 import chalk from 'chalk';
 import { fetchTranscript, formatTranscriptAsText } from '../utils/youtube.js';
+import { isYtDlpAvailable, fetchTranscriptViaStt } from '../utils/stt.js';
 import { createProvider } from '../providers/index.js';
 import { getPrompt } from '../prompts/templates.js';
 import type { ProviderType } from '../providers/types.js';
@@ -23,8 +24,27 @@ export async function analyzeCommand(
 
   let transcript: string;
   try {
-    const entries = await fetchTranscript(url, options.transcriptLang);
+    let entries = await fetchTranscript(url, options.transcriptLang);
     transcript = formatTranscriptAsText(entries);
+
+    // Fallback: yt-dlp + Whisper STT
+    if (!transcript.trim()) {
+      spinner.text = 'No subtitles found. Trying speech-to-text (yt-dlp + Whisper)...';
+
+      if (!(await isYtDlpAvailable())) {
+        spinner.fail('No subtitles available and yt-dlp is not installed.\nInstall with: brew install yt-dlp');
+        process.exit(1);
+      }
+
+      entries = await fetchTranscriptViaStt(url, options.transcriptLang);
+      transcript = formatTranscriptAsText(entries);
+    }
+
+    if (!transcript.trim()) {
+      spinner.fail('Failed to extract transcript');
+      process.exit(1);
+    }
+
     spinner.succeed(`Transcript fetched (${transcript.length} chars)`);
   } catch (error) {
     spinner.fail('Failed to fetch transcript');
